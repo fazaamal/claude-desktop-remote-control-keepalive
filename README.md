@@ -70,8 +70,14 @@ from preferences on every tick, so there's no hardcoded list.
 3. **Open the console** — press **Cmd-Option-I**. Two DevTools windows open; use the
    **main content** one and click the **Console** tab.
 
-4. **Paste `keepalive.js`** into the console and press Enter. You'll see it arm and print
-   a line per targeted chat, e.g. `[rc 23:41:02] Payment gateway options: ON`.
+4. **Paste `keepalive.js`** into the console and press Enter.
+
+   > **First paste:** DevTools blocks pasted code with a self-XSS warning
+   > ("Warning: Don't paste code you don't understand…"). Type **`allow pasting`** in the
+   > console and press Enter once — then paste the script.
+
+   You'll see it arm and print a line per targeted chat, e.g.
+   `[rc 23:41:02] Payment gateway options: ON`.
 
 That's it. You can close the DevTools window — the timer keeps running in the page.
 
