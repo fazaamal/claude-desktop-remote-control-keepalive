@@ -7,6 +7,9 @@ chat goes idle.
 > Unofficial. Uses the desktop app's own internal renderer APIs via its built-in
 > developer console. No app files are modified. It may break on future updates.
 
+**Tested on:** Claude Desktop for macOS `2.2553.1` (macOS 26.3.1). These are undocumented
+internal APIs — newer builds may change or remove them.
+
 ## The problem
 
 A Claude Code chat is reachable from claude.ai / your phone only while its session is
@@ -50,8 +53,8 @@ from preferences on every tick, so there's no hardcoded list.
 
 ## Requirements
 
-- macOS Claude Desktop (tested on a hardened build that refuses `--remote-debugging-port`;
-  this approach doesn't need a debug port).
+- macOS Claude Desktop, tested on `2.2553.1` (a hardened build that refuses
+  `--remote-debugging-port`; this approach doesn't need a debug port).
 - The machine stays powered on with the app open (that's the point).
 
 ## Setup
