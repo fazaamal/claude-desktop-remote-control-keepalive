@@ -35,14 +35,18 @@ The script runs this on a timer for the chats you actually care about.
 
 ## Which chats it targets
 
-Every **grouped or pinned** local Code chat on this machine — excluding archived, cloud,
-and remote-started sessions. It re-reads your groups/pins from preferences on every tick,
-so grouping or pinning a chat is picked up automatically; no hardcoded list.
+Local Code chats on this machine that you've **grouped** (and, optionally, pinned) —
+excluding archived, cloud, and remote-started sessions. It re-reads your sidebar state
+from preferences on every tick, so there's no hardcoded list.
 
-- Groups come from `epitaxyPrefs["dframe-group-scopes"][*].assignments` (reliable).
-- Pins come from `epitaxyPrefs["dframe-local-slice"].pinnedOrder`. **Heads up:** this list
-  can be stale (it may keep chats that were unpinned). Set `INCLUDE_PINNED = false` at the
-  top of the script for groups-only.
+- **Grouping is the dependable signal.** Groups come from
+  `epitaxyPrefs["dframe-group-scopes"][*].assignments`, which accurately reflects the
+  sidebar. Group a chat and it's picked up automatically; ungroup it and it drops off.
+- **Pinning is not stable — use with caution.** Pins come from
+  `epitaxyPrefs["dframe-local-slice"].pinnedOrder`, which is **unreliable**: it can keep
+  chats that have already been unpinned, so enabling pins may target chats you didn't
+  expect. It ships on (`INCLUDE_PINNED = true`) purely as a best-effort convenience.
+  **If you want dependable targeting, group the chats and set `INCLUDE_PINNED = false`.**
 
 ## Requirements
 
@@ -85,8 +89,9 @@ clearInterval(window.__rcKeepAlive)
 
 - **Dies on a full app restart** — re-paste it afterwards. (Idle-drops don't restart the
   app, so this still covers the actual bug.) There's no supported "run on launch" hook.
-- **`pinnedOrder` can be stale** — see above; use `INCLUDE_PINNED = false` if it
-  over-includes.
+- **Pinned targeting is unreliable** — the prefs `pinnedOrder` list is not stable and can
+  include already-unpinned chats. Prefer grouping; set `INCLUDE_PINNED = false` to ignore
+  pins entirely.
 - Internal APIs are undocumented and may change between versions.
 
 ## License
