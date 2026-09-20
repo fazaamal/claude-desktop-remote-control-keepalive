@@ -1,8 +1,12 @@
 # Claude Desktop — Remote Control keepalive
 
-A tiny console script that keeps your **Claude Code** chats reachable from your phone
-(via Remote Control) by automatically reconnecting bridges that silently drop after a
-chat goes idle.
+A tiny console script that keeps your **Claude Code chats — the ones started in the
+Claude Desktop app (Code tab)** — reachable from your phone (via Remote Control) by
+automatically reconnecting bridges that silently drop after a chat goes idle.
+
+Scope: this is only for Code sessions **created in the desktop app on this machine**. It
+does **not** apply to `claude` CLI sessions run in a terminal, or to sessions on other
+machines / in the cloud.
 
 > Unofficial. Uses the desktop app's own internal renderer APIs via its built-in
 > developer console. No app files are modified. It may break on future updates.
@@ -38,9 +42,11 @@ The script runs this on a timer for the chats you actually care about.
 
 ## Which chats it targets
 
-Local Code chats on this machine that you've **grouped** (and, optionally, pinned) —
-excluding archived, cloud, and remote-started sessions. It re-reads your sidebar state
-from preferences on every tick, so there's no hardcoded list.
+Desktop-app Code chats on this machine that you've **grouped** (and, optionally, pinned) —
+excluding archived, cloud, and remote-started sessions. (CLI-only sessions and sessions
+from other machines never appear in the app's local session list, so they're out of scope
+by construction.) It re-reads your sidebar state from preferences on every tick, so there's
+no hardcoded list.
 
 - **Grouping is the dependable signal.** Groups come from
   `epitaxyPrefs["dframe-group-scopes"][*].assignments`, which accurately reflects the
